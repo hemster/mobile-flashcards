@@ -30,8 +30,7 @@ export function handleInitialData() {
     return Promise.all([
       getDecks(),
     ])
-      .then((decks) => {
-        console.warn('receiveDecks')
+      .then(([decks]) => {
         dispatch(receiveDecks(decks))
       })
   }

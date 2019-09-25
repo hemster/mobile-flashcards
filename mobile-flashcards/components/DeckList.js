@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
 import { gray, black } from "../utils/colors";
-
 import { handleInitialData } from "../actions";
 
 class DeckList extends Component {
   componentDidMount() {
     this.props.handleInitialData()
   }
+  
   render() {
-      return (
-        <ScrollView style={styles.container}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate(
-              'DeckDetails',
-              { entryId: 'title' }
-            )}
-          >
-            <View style={styles.cell} >
-              <Text style={styles.titleText}>DeckList</Text>
-              <Text style={styles.cardsText}>3 cards</Text>
-            </View>
-          </TouchableOpacity>
-        </ScrollView>
-      );
+    const { decks } = this.props
+
+    if (decks.length < 1) {
+      return <Text style={styles.titleText}>No Deck</Text>
+    }
+
+    return (
+      <ScrollView style={styles.container}>
+      {
+          decks.map(({ title, questions }) => {
+            return (
+              <TouchableOpacity
+              onPress={() => this.props.navigation.navigate(
+                'DeckDetails',
+                { title: { title } }
+              )}
+            >
+              <View style={styles.cell} >
+                  <Text style={styles.titleText}>{title}</Text>
+                  <Text style={styles.cardsText}>{questions.length} cards</Text>
+              </View>
+            </TouchableOpacity>
+            )
+          })
+      }
+      </ScrollView>
+    );
   }
 }
 
@@ -61,9 +72,8 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks) {
-  console.warn(decks)
   return {
-    decks
+    decks: Object.values(decks)
   }
 }
 function mapDispatchToProps(dispatch) {
