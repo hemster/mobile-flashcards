@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native'
 export const UDACICARDS_STORAGE_KEY = 'UdaciCards:decks'
 
 // debuug init
-export function initFakeData() {
+export async function initFakeData() {
     const data = {
         React: {
             title: 'React',
@@ -28,14 +28,17 @@ export function initFakeData() {
             ]
         }
     }
-
-    AsyncStorage.setItem(UDACICARDS_STORAGE_KEY, JSON.stringify(data))
+    console.warn(UDACICARDS_STORAGE_KEY);
+    console.warn(JSON.stringify(data));
+    await AsyncStorage.setItem(UDACICARDS_STORAGE_KEY, JSON.stringify(data))
 }
 
 export function getDecks() {
     return AsyncStorage.getItem(UDACICARDS_STORAGE_KEY)
         .then((results) => {
+            console.warn(results)
             const decks = JSON.parse(results)
+            console.warn(decks)
             return decks
         })
 }
