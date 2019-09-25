@@ -3,24 +3,23 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import DeckListScreen from '../screens/DeckListScreen';
+import AddDeckScreen from '../screens/AddDeckScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const DeckListStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    DeckList: DeckListScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+DeckListStack.navigationOptions = {
+  tabBarLabel: 'DeckList',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -33,44 +32,27 @@ HomeStack.navigationOptions = {
   ),
 };
 
-HomeStack.path = '';
+DeckListStack.path = '';
 
-const LinksStack = createStackNavigator(
+const AddDeckStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    AddDeck: AddDeckScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+AddDeckStack.navigationOptions = {
+  tabBarLabel: 'AddDeck',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
-
-const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
-);
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
-
-SettingsStack.path = '';
+AddDeckStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+  DeckListStack,
+  AddDeckStack,
 });
 
 tabNavigator.path = '';

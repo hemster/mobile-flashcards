@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+import { initFakeData } from './utils/AsyncStorageHelper';
 import AppNavigator from './navigation/AppNavigator';
 
 export default function App(props) {
@@ -41,6 +42,7 @@ async function loadResourcesAsync() {
       // remove this if you are not using it in your app
       'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
     }),
+    initFakeData()
   ]);
 }
 
