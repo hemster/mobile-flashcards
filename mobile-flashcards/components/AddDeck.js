@@ -12,6 +12,11 @@ class AddDeck extends Component {
   handleSubmit = () => {
     const { title } = this.state
     this.props.handleAddCDeck(title)
+    this.props.navigation.navigate(
+      'DeckDetails',
+      { title }
+    )
+
     this.setState(() => ({
       title: ''
     }))
