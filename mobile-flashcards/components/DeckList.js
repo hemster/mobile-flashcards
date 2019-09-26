@@ -22,11 +22,12 @@ class DeckList extends Component {
           decks.map(({ title, questions }) => {
             return (
               <TouchableOpacity
-              onPress={() => this.props.navigation.navigate(
-                'DeckDetails',
-                { title: { title } }
-              )}
-            >
+                key={title}
+                onPress={() => this.props.navigation.navigate(
+                  'DeckDetails',
+                  { title }
+                )}
+              >
               <View style={styles.cell} >
                   <Text style={styles.titleText}>{title}</Text>
                   <Text style={styles.cardsText}>{questions.length} cards</Text>
@@ -76,6 +77,7 @@ function mapStateToProps(decks) {
     decks: Object.values(decks)
   }
 }
+
 function mapDispatchToProps(dispatch) {
   return ({
     handleInitialData: () => { dispatch(handleInitialData()) }
@@ -83,4 +85,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckList)
-

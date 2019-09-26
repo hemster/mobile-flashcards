@@ -16,6 +16,8 @@ import middleware from './middleware'
 import DeckList from "./components/DeckList";
 import AddDeck from "./components/AddDeck";
 import DeckDetails from "./components/DeckDetails";
+import AddCard from "./components/AddCard";
+import Quiz from "./components/Quiz";
 
 import { initFakeData } from "./utils/api";
 
@@ -68,6 +70,24 @@ const MainNavigator = createStackNavigator({
   },
   DeckDetails: {
     screen: DeckDetails,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {

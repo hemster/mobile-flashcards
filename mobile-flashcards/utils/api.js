@@ -73,3 +73,13 @@ export function addCardToDeck({ title, card }) {
         }
     }))
 }
+
+export function deleteDeck(title) {
+    return AsyncStorage.getItem(UDACICARDS_STORAGE_KEY)
+        .then((results) => {
+            const data = JSON.parse(results)
+            data[title] = undefined
+            delete data[title]
+            AsyncStorage.setItem(UDACICARDS_STORAGE_KEY, JSON.stringify(data))
+        })
+}
