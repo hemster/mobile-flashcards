@@ -1,4 +1,4 @@
-import { getDecks, saveCardToDeck } from "../utils/api";
+import { getDecks, saveCardToDeck, saveDeckTitle } from "../utils/api";
 export const ADD_DECK = 'ADD_DECK'
 export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK'
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
@@ -62,6 +62,17 @@ export function handleAddCardToDeck(title, question, answer ) {
     ])
       .then(() => {
         dispatch(addCardToDeck(title, question, answer))
+      })
+  }
+}
+
+export function handleAddCDeck(title) {
+  return (dispatch) => {
+    return Promise.all([
+      saveDeckTitle(title),
+    ])
+      .then(() => {
+        dispatch(addDeck(title))
       })
   }
 }
