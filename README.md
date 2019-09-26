@@ -8,7 +8,7 @@ It's a react native app for user to pratice their knowledge
 
 * clone the Project - `git@github.com:hemster/mobile-flashcards.git`
 * navi to the folder - `cd mobile-flashcards/`
-* install the dependencies - `npm install`
+* install the dependencies - `yarn install`
 * start the project - `yarn run ios`
 
 ## Contributing
