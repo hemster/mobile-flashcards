@@ -11,6 +11,9 @@ It's a react native app for user to pratice their knowledge
 * install the dependencies - `yarn install`
 * start the project - `yarn run ios`
 
+## Test
+It has been tested in iOS simulator
+
 ## Contributing
 
 Because this is an udacity react nanodegree project thus I will not be accepting pull requests.
