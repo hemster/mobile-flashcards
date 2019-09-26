@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 import { View, StyleSheet, Text, TouchableOpacity, Platform } from 'react-native';
 import { gray, black, purple, white, green, red } from "../utils/colors";
 import { handleDeleteDeck } from "../actions/index";
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/helpers'
 
 class Quiz extends Component {
   state = {
@@ -23,6 +27,8 @@ class Quiz extends Component {
       'Quiz',
       { title }
     )
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   render() {
