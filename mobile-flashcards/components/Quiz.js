@@ -79,7 +79,7 @@ class Quiz extends Component {
       )
     }
 
-    const { question, answer } = questions[index]
+    const { question, answer } = questions[index].question
 
     return (
       <View style={styles.container}>
