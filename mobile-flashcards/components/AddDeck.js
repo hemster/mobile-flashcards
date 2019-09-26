@@ -43,7 +43,7 @@ class AddDeck extends Component {
             (Platform.OS === 'ios' ? styles.iosSubmitBtnDisabled : styles.AndroidSubmitBtnDisabled) : (Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn)}
           onPress={() => this.handleSubmit()}
           disabled={shouldDisableSubmit}>
-          <Text style={styles.submitBtnText}>Submit</Text>
+          <Text style={styles.submitBtnText}>Create Deck</Text>
         </TouchableOpacity>
       </View>
     );
