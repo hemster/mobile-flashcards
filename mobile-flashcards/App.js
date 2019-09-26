@@ -19,8 +19,6 @@ import DeckDetails from "./components/DeckDetails";
 import AddCard from "./components/AddCard";
 import Quiz from "./components/Quiz";
 
-import { initFakeData } from "./utils/api";
-
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -100,10 +98,6 @@ const MainNavigator = createStackNavigator({
 const AppContainer = createAppContainer(MainNavigator);
 const store = createStore(reducer, middleware)
 export default class App extends React.Component {
-  componentDidMount() {
-    initFakeData()
-  }
-
   render() {
     return (
       <Provider store={store}>
