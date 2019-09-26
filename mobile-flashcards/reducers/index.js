@@ -16,7 +16,7 @@ function entries (state = {}, action) {
         ...state,
         [action.title]: {
           title: action.title,
-          questions: [...questions, card]
+          questions: [...questions, action.card]
         }
       }
     case RECEIVE_DECKS:
@@ -27,7 +27,7 @@ function entries (state = {}, action) {
     case DELETE_DECK:
       var newState = state
       newState[action.title] = undefined
-      delete newState[action.title]
+      delete state[action.title]
       return {
         ...newState,
       }

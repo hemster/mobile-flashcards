@@ -64,12 +64,11 @@ export function saveDeckTitle(title) {
     }))
 }
 
-// card => {question, answer}
-export function addCardToDeck({ title, card }) {
+export function saveCardToDeck(title, question, answer) {
     return AsyncStorage.mergeItem(UDACICARDS_STORAGE_KEY, JSON.stringify({
         [title]: {
             title,
-            questions: [ card ]
+            questions: [{ question, answer } ]
         }
     }))
 }
