@@ -55,6 +55,20 @@ class Quiz extends Component {
           <View style={styles.cell} >
             <Text style={styles.titleText}>{`Your Score is ${(correctAnswer / questionCount) * 100} %`}</Text>
           </View>
+          <TouchableOpacity
+            style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+            onPress={() => this.setState({
+              index: 0,
+              correctAnswer: 0,
+              showAnswer: false
+            })}>
+            <Text style={styles.submitBtnText}>Restart Quiz</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={Platform.OS === 'ios' ? styles.iosCorrectBtn : styles.AndroidCorrectBtn}
+            onPress={() => this.props.goBack()}>
+            <Text style={styles.submitBtnText}>Back to Deck</Text>
+          </TouchableOpacity>
         </View>
       )
     }
@@ -200,7 +214,13 @@ function mapStateToProps(decks, { navigation }) {
   }
 }
 
-export default connect(mapStateToProps)(Quiz)
+function mapDispatchToProps(dispatch, { navigation }) {
+  return {
+    goBack: () => navigation.goBack(),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz)
 
 
 
