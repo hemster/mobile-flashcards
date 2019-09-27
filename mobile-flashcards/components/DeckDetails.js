@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 import { View, StyleSheet, Text, TouchableOpacity, Platform } from 'react-native';
 import { gray, black, purple, white } from "../utils/colors";
 import { handleDeleteDeck } from "../actions/index";
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/helpers'
 
 class DeckDetails extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -24,6 +28,8 @@ class DeckDetails extends Component {
       'Quiz',
       { title }
     )
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   render() {
@@ -38,7 +44,7 @@ class DeckDetails extends Component {
       <View style={styles.container}>
         <View style={styles.cell} >
           <Text style={styles.titleText}>{title}</Text>
-          <Text style={styles.cardsText}>{questions.length} cards</Text>
+          <Text style={styles.cardsText}>{questions.length} {questions.length > 1 ? "Cards" : "Card"}</Text>
         </View>
         <TouchableOpacity
           style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
@@ -52,7 +58,7 @@ class DeckDetails extends Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
-          onPress={() => handleDeleteDeck()}>
+          onPress={handleDeleteDeck}>
           <Text style={styles.submitBtnText}>Delete deck</Text>
         </TouchableOpacity>
       </View>

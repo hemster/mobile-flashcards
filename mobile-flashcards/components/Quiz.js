@@ -3,10 +3,6 @@ import { connect } from 'react-redux'
 import { View, StyleSheet, Text, TouchableOpacity, Platform } from 'react-native';
 import { gray, black, purple, white, green, red } from "../utils/colors";
 import { handleDeleteDeck } from "../actions/index";
-import {
-  clearLocalNotification,
-  setLocalNotification
-} from '../utils/helpers'
 
 class Quiz extends Component {
   state = {
@@ -15,20 +11,35 @@ class Quiz extends Component {
     showAnswer: false
   }
 
-  handleAddCard = (title) => {
-    this.props.navigation.navigate(
-      'AddCard',
-      { title }
-    )
+  handleRestartQuiz = () => {
+    this.setState({
+      index: 0,
+      correctAnswer: 0,
+      showAnswer: false
+    })
+  }
+  toggleAnswer = () => {
+    this.setState((state) => {
+      return { showAnswer: !state.showAnswer }
+    })
   }
 
-  handleStartQuiz = (title) => {
-    this.props.navigation.navigate(
-      'Quiz',
-      { title }
-    )
-    clearLocalNotification()
-      .then(setLocalNotification)
+  handleCorrectAnswer = () => {
+    this.setState((state) => {
+      return { 
+        index: state.index + 1, 
+        correctAnswer: state.correctAnswer + 1, 
+        showAnswer: false
+      }
+    })
+  }
+
+  handleIncorrectAnswer = () => {
+    this.setState((state) => {
+      return { 
+        index: state.index + 1, 
+        showAnswer: false };
+    });
   }
 
   render() {
@@ -56,6 +67,7 @@ class Quiz extends Component {
     const { index, correctAnswer, showAnswer } = this.state
     const questionCount = questions.length
     if (index === questions.length) {
+      const { goBack } = this.props
       return(
         <View style={styles.container}>
           <View style={styles.cell} >
@@ -63,16 +75,12 @@ class Quiz extends Component {
           </View>
           <TouchableOpacity
             style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
-            onPress={() => this.setState({
-              index: 0,
-              correctAnswer: 0,
-              showAnswer: false
-            })}>
+            onPress={this.handleRestartQuiz}>
             <Text style={styles.submitBtnText}>Restart Quiz</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={Platform.OS === 'ios' ? styles.iosCorrectBtn : styles.AndroidCorrectBtn}
-            onPress={() => this.props.goBack()}>
+            onPress={goBack}>
             <Text style={styles.submitBtnText}>Back to Deck</Text>
           </TouchableOpacity>
         </View>
@@ -92,17 +100,17 @@ class Quiz extends Component {
         </View>
         <TouchableOpacity
           style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
-          onPress={() => this.setState({ showAnswer: !showAnswer })}>
+          onPress={this.toggleAnswer}>
           <Text style={styles.submitBtnText}>{showAnswer? "Question " : "Answer"}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={Platform.OS === 'ios' ? styles.iosCorrectBtn : styles.AndroidCorrectBtn}
-          onPress={() => this.setState({ index: index + 1, correctAnswer: correctAnswer + 1 })}>
+          onPress={this.handleCorrectAnswer}>
           <Text style={styles.submitBtnText}>Correct</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={Platform.OS === 'ios' ? styles.iosInCorrectBtn : styles.AndroidInCorrectBtn}
-          onPress={() => this.setState({ index: index + 1 })}>
+          onPress={this.handleIncorrectAnswer}>
           <Text style={styles.submitBtnText}>Incorrect</Text>
         </TouchableOpacity>
       </View>

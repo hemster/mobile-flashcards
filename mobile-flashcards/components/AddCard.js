@@ -54,7 +54,7 @@ class AddCard extends Component {
         <TouchableOpacity
           style={shouldDisableSubmit?
           (Platform.OS === 'ios' ? styles.iosSubmitBtnDisabled : styles.AndroidSubmitBtnDisabled) : (Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn)}
-          onPress={() => this.handleSubmit()}
+          onPress={this.handleSubmit}
         disabled={shouldDisableSubmit}>
           <Text style={styles.submitBtnText}>Submit</Text>
         </TouchableOpacity>
